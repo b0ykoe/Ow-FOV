@@ -15,9 +15,6 @@ env:
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Release
 
-permissions:
-  contents: read
-
 jobs:
   build:
     runs-on: windows-latest
@@ -37,7 +34,6 @@ jobs:
     - uses: "marvinpinto/action-automatic-releases@latest"
       with:
        repo_token: ${{ secrets.GITHUB_TOKEN }}
-       automatic_release_tag: "latest"
        prerelease: false
        title: "Development Build"
        files: | 
