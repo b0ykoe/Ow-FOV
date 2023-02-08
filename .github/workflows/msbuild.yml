@@ -38,5 +38,5 @@ jobs:
        prerelease: false
        title: "New Release!"
        files: | 
-         *.dll
+         x64/Release/FovChanger.dll
 
