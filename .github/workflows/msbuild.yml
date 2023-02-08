@@ -34,27 +34,12 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
       
-    - name: Create Draft Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: "marvinpinto/action-automatic-releases@latest"
       with:
-        tag_name: "latest"
-        release_name: "latest"
-        prerelease: false
-
-    - uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./x64/Release/
-        asset_name: FovChanger.dll
-
-    - uses: eregon/publish-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        release_id: ${{ steps.create_release.outputs.id }}
+       repo_token: "${{ secrets.GITHUB_TOKEN }}"
+       automatic_release_tag: "latest"
+       prerelease: false
+       title: "Development Build"
+       files: | 
+         *.dll
 
